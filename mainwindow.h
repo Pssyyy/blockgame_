@@ -26,7 +26,6 @@ protected:
 
 private:
     Ui::MainWindow *ui;
-
     static const int SIZE = 8;
     int grid[SIZE][SIZE];
     int score;
@@ -34,23 +33,20 @@ private:
     bool isDragging;
     QPoint dragPos;
 
-    QVector<QVector<QPoint>> shapes = {
-        {{0,0}},
-        {{0,0},{0,1}},
-        {{0,0},{1,0}},
-        {{0,0},{1,0},{1,1}},
-        {{0,0},{0,1},{1,0},{1,1}},
-        {{0,1},{1,0},{1,1},{1,2}},
-        {{0,0},{0,1},{0,2}}
-    };
+    QVector<QVector<QPoint>> shapes;
 
     void drawGrid(QPainter &p);
     void drawShapesPanel(QPainter &p);
     void drawDraggingShape(QPainter &p);
+
     bool canPlace(int shapeIdx, int gridX, int gridY);
     void placeShape(int shapeIdx, int gridX, int gridY);
     void checkAndClearLines();
     bool isGameOver();
+
+    QVector<QPoint> randomShape(int maxCell = 4);
+    QVector<QPoint> rotateShapeRandom(const QVector<QPoint>& src);
+    void refreshRandomShapes(int count = 7);
 };
 
 #endif // MAINWINDOW_H
